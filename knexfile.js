@@ -7,7 +7,7 @@ module.exports = {
     connection: {
       database: 'sleep_tracker',
       user: 'postgres',
-      password: 'root'
+      
     },
   },
 
