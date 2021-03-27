@@ -6,7 +6,8 @@ const db = pg({
   "host": "localhost",
   "port": 5432,
   "database": "sleep_tracker",
-  "user": "postgres"
+  "user": "postgres",
+  "password": "root"
 })
 
 module.exports = db;
