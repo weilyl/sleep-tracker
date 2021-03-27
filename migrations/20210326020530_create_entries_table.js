@@ -3,7 +3,7 @@ exports.up = function(knex) {
   return knex.schema.createTable('entries', function(table) {
       table.increments('id');
       table.integer('hours');
-      table.datetime('day');
+      table.date('day');
       table.timestamp('wakeup');
       table.text('description');
       table.string('title');

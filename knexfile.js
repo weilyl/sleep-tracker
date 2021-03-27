@@ -8,7 +8,7 @@ module.exports = {
       database: 'sleep_tracker',
       user: 'postgres',
       password: 'root'
-    }
+    },
   },
 
   staging: {

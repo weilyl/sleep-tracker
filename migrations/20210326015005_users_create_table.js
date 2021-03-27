@@ -6,10 +6,10 @@ exports.up = function(knex) {
     table.string('password')
     table.string('firstname').notNullable()
     table.string('lastname')
-    table.datetime('DOB')
+    table.date('dob')
   })
 };
 
 exports.down = function(knex) {
-  
+  return knex.schema.dropTable('users')
 };
