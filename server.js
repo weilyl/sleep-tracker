@@ -3,7 +3,7 @@ const {getAllUsers, createUser, getUserById, updateUserInfo, deleteUserProfile} 
 const userRouter = require('express').Router()
 const db = require('./db')
 const user = require('./models/userModel.js')
-
+require('dotenv').config()
 //Create Express App
 const app = express()
 
