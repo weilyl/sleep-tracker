@@ -1,8 +1,8 @@
 const db = require('../db');
 
 class Entry {
-    constructor() {
-
+    constructor(entryInfo = {}) {
+        this.entryInfo = entryInfo;
     }
 
     async createEntry(req, res) {
@@ -14,7 +14,6 @@ class Entry {
                     'INSERT INTO entries (hours, day, wakeup, description, title) VALUES (${hours}, ${day}, ${wakeup}, ${description}, ${title})',
                     req.body
                 );
-                
                 res.status(200).json(entry);
             }
             catch (err) {
@@ -44,7 +43,7 @@ class Entry {
                 const entry = await db.one(
                     'SELECT * FROM entries WHERE id=${id}, user_id=${user_id}', req.params
                 );
-                res.status(200).json(entry);
+                return res.status(200).json(entry);
             }
             catch (err) {
                 res.status(500).send(err);
@@ -66,7 +65,7 @@ class Entry {
         // }
     }
 
-    parseBody(request) {
+    async parseBody(request) {
         const changes = Object.entries(request.body);
 
         let query = 'UPDATE entries SET';

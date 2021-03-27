@@ -1,0 +1,23 @@
+GET http://localhost:3000/entries/1
+
+### 
+
+GET http://localhost:3000/entries/1/1
+
+###
+
+POST http://localhost:3000/new-entry
+Content-Type: application/json
+{
+    "hours": 9
+}
+
+###
+PUT http://localhost:3000/entry/1/1
+Content-Type: application/json
+{
+    "hours": 8
+}
+
+###
+DELETE http://localhost:3000/delete-entry/1
