@@ -86,4 +86,19 @@ class Entry {
         return query
     }
 
+    static deleteEntry(req, res) {
+        async (req, res) => {
+            try {
+                const entry = await db.none('DELETE FROM entries WHERE id=${id}', req.params);
+
+                return res.status(200).json(entry);
+            }
+            catch (err) {
+                res.status(500).send(err);
+            }
+        }
+    }
+
 }
+
+module.exports = Entry;
