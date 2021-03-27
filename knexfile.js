@@ -6,8 +6,8 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'sleep_tracker',
-      user: 'postgres',
-      password: 'root'
+      user: process.env.USER,
+      password: process.env.PASSWORD
     },
   },
 

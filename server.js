@@ -3,9 +3,10 @@ const {getAllUsers, createUser, getUserById, updateUserInfo, deleteUserProfile} 
 const userRouter = require('express').Router()
 const db = require('./db')
 const user = require('./models/userModel.js')
+const dotenv = require('dotenv');
+dotenv.config();
 
 const Entry = require('./Models/Entry');
-
 const entry = new Entry();
 
 //Create Express App
@@ -26,15 +27,13 @@ app.patch('/updateUser/:id', updateUserInfo)
 app.delete('/deleteUser/:id', deleteUserProfile)
 
 
+// entries table routes
 app.post('/new-entry', entry.createEntry);
-
 app.get('/entries/:user_id', entry.getEntries);
-
 app.get('/entry/:id/:user_id', entry.getOneEntry);
-
 app.put('/entry/:id/:user_id', entry.updateEntry);
-
 app.delete('/delete-entry/:id', entry.deleteEntry);
+
 
 app.listen(PORT, ()=> {
     console.log(`listenining on http://localhost:${PORT}`)

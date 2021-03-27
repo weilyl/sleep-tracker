@@ -1,3 +1,16 @@
+POST http://localhost:3000/createUser
+Content-Type: application/json
+
+{
+    "username": "weily2",
+    "password": "weily2",
+    "firstname": "Weily2",
+    "lastname": "Weily2",
+    "dob": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+###
+
 GET http://localhost:3000/entries/1
 
 ### 
