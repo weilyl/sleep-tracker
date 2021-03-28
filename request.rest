@@ -34,8 +34,8 @@ PUT http://localhost:3000/entry/17/1
 Content-Type: application/json
 
 {
-    "hours": 8
+    "hours": 9
 }
 
 ###
-DELETE http://localhost:3000/delete-entry/1
+DELETE http://localhost:3000/delete-entry/1/15

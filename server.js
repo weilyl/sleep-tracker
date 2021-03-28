@@ -32,7 +32,7 @@ app.post('/:user_id/new-entry', entry.createEntry);
 app.get('/entries/:user_id', entry.getEntries);
 app.get('/entry/:id/:user_id', entry.getOneEntry);
 app.put('/entry/:id/:user_id', entry.updateEntry);
-app.delete('/delete-entry/:id', entry.deleteEntry);
+app.delete('/delete-entry/:user_id/:id', entry.deleteEntry);
 
 
 app.listen(PORT, ()=> {
