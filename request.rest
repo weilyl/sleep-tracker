@@ -19,15 +19,20 @@ GET http://localhost:3000/entries/1/1
 
 ###
 
-POST http://localhost:3000/new-entry
+POST http://localhost:3000/1/new-entry/
 Content-Type: application/json
+
 {
-    "hours": 9
+    "hours": 9, 
+    "day": "2021-03-27",
+    "title": "Good morning", 
+    "description": "Today I woke up"
 }
 
 ###
-PUT http://localhost:3000/entry/1/1
+PUT http://localhost:3000/entry/17/1
 Content-Type: application/json
+
 {
     "hours": 8
 }

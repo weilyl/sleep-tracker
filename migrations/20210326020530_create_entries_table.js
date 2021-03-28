@@ -2,9 +2,9 @@
 exports.up = function(knex) {
   return knex.schema.createTable('entries', function(table) {
       table.increments('id');
-      table.integer('hours');
+      table.integer('hours').notNullable();
       table.date('day');
-      table.timestamp('wakeup');
+      table.timestamps(true, true);
       table.text('description');
       table.string('title');
   })

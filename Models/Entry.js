@@ -9,11 +9,17 @@ class Entry {
         // this.entryInfo = req.body;
 
             // (req, res) => {
+            console.log(req.params.user_id)
+            console.log(
+                await db.query(`SELECT hours FROM entries`)
+            )
             try {
                 const entry = await db.one(
-                    'INSERT INTO entries (hours, day, wakeup, description, title) VALUES (${hours}, ${day}, ${wakeup}, ${description}, ${title})',
+                    `INSERT INTO entries (hours, day, title, description, user_id) VALUES ($<hours>, $<day>, $<title>, $<description>, ${req.params.user_id}) RETURNING *`,
                     req.body
-                );
+                )
+                console.log("screm")
+
                 
                 res.status(200).json(entry);
             }
@@ -41,7 +47,7 @@ class Entry {
     async getOneEntry(req, res) {
         // async (req, res) => {
             try {
-                const entry = await db.one(
+                const entry = await db.any(
                     'SELECT * FROM entries WHERE id=${id}, user_id=${user_id}', req.params
                 );
                 res.status(200).json(entry);
@@ -54,9 +60,31 @@ class Entry {
 
     async updateEntry(req, res) {
         // async (req, res) => {
+            
+            function parseBody(request) {
+                const changes = Object.entries(request.body);
+        
+                let query = 'UPDATE entries SET';
+        
+                changes.forEach(([key, value], idx) => {
+                    if (idx!==changes.length-1) {
+                        query += ` ${key}=${value},`
+                    } else {
+                        query += ` ${key}=${value}`
+                    }
+                })
+        
+                query += ` WHERE id=${request.params.id} AND user_id=${request.params.user_id} RETURNING *`
+        
+                return query
+            }
+            
 
             try {
-                const entry = await db.any(this.parseBody(req));
+
+                const entry = await db.one
+                (parseBody(req))
+                // ('UPDATE entries SET hours=$1 WHERE id=$2 AND user_id=$3 RETURNING *', [req.body.hours, req.params.id, req.params.user_id]);
  
                 res.status(200).json(entry)
             }
@@ -66,25 +94,25 @@ class Entry {
         // }
     }
 
-    parseBody(request) {
-        const changes = Object.entries(request.body);
+    // parseBody(request) {
+    //     const changes = Object.entries(request.body);
 
-        let query = 'UPDATE entries SET';
+    //     let query = 'UPDATE entries SET';
 
-        changes.forEach(([key, value], idx) => {
-            if (idx!==changes.length-1) {
-                query += ` ${key}=${value},`
-            } else {
-                query += ` ${key}=${value}`
-            }
-        })
+    //     changes.forEach(([key, value], idx) => {
+    //         if (idx!==changes.length-1) {
+    //             query += ` ${key}=${value},`
+    //         } else {
+    //             query += ` ${key}=${value}`
+    //         }
+    //     })
 
-        query += ` WHERE id=${request.params.id}, user_id=${request.params.user_id}`
+    //     query += ` WHERE id=${request.params.id} AND user_id=${request.params.user_id} RETURNING *`
 
-        console.log(query)
+    //     // console.log(query)
 
-        return query
-    }
+    //     return query
+    // }
 
     async deleteEntry() {
         // async (req, res) => {

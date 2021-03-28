@@ -28,7 +28,7 @@ app.delete('/deleteUser/:id', deleteUserProfile)
 
 
 // entries table routes
-app.post('/new-entry', entry.createEntry);
+app.post('/:user_id/new-entry', entry.createEntry);
 app.get('/entries/:user_id', entry.getEntries);
 app.get('/entry/:id/:user_id', entry.getOneEntry);
 app.put('/entry/:id/:user_id', entry.updateEntry);
@@ -36,5 +36,5 @@ app.delete('/delete-entry/:id', entry.deleteEntry);
 
 
 app.listen(PORT, ()=> {
-    console.log(`listenining on http://localhost:${PORT}`)
+    console.log(`listening on http://localhost:${PORT}`)
 })
