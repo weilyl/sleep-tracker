@@ -3,11 +3,11 @@ require('dotenv').config()
 const pg = require('pg-promise')()
 
 const db = pg({
-  "host": process.env.DB_HOST,
+  "host": 'localhost',
   "port": 5432,
   "database": "sleep_tracker",
-  "user": process.env.DB_USER,
-  "password": process.env.DB_PASS
+  "user": 'postgres',
+  "password": 'root'
 })
 
 module.exports = db;
