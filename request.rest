@@ -15,7 +15,7 @@ GET http://localhost:3000/entries/1
 
 ### 
 
-GET http://localhost:3000/entries/1/1
+GET http://localhost:3000/entry/14/1
 
 ###
 
@@ -23,10 +23,10 @@ POST http://localhost:3000/1/new-entry/
 Content-Type: application/json
 
 {
-    "hours": 9, 
-    "day": "2021-03-27",
-    "title": "Good morning", 
-    "description": "Today I woke up"
+    "hours": 7, 
+    "day": "2021-03-22",
+    "title": "Good afternoon", 
+    "description": "Today I woke up again"
 }
 
 ###
@@ -38,4 +38,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/delete-entry/1/15
+DELETE http://localhost:3000/delete-entry/1/17

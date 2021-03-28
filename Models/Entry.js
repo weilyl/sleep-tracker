@@ -6,21 +6,24 @@ class Entry {
     }
 
     async createEntry(req, res) {
-        // this.entryInfo = req.body;
-
-        // console.log(req.params.user_id)
-        // console.log(
-        //     await db.query(`SELECT hours FROM entries`)
-        // )
+        
         try {
-            const entry = await db.one(
-                `INSERT INTO entries (hours, day, title, description, user_id) VALUES ($<hours>, $<day>, $<title>, $<description>, ${req.params.user_id}) RETURNING *`,
-                req.body
-            )
-            // console.log("screm")
 
-            
-            res.status(200).json(entry);
+            const count = await db.one(`SELECT COUNT (*) FROM entries WHERE user_id=${req.params.user_id} AND day=$<day>`, req.body);
+
+            if (parseInt(count.count) === 0) {
+                const entry = await db.one(
+                    `INSERT INTO entries (hours, day, title, description, user_id) VALUES ($<hours>, $<day>, $<title>, $<description>, ${req.params.user_id}) RETURNING *`,
+                    req.body
+                )
+                res.status(200).json(entry);
+
+            } else {
+                res.json({
+                    "message": "You already have an entry for this day. Did you want to edit it?"
+                })
+            }
+
         }
         catch (err) {
             res.status(500).send(err);
@@ -43,7 +46,7 @@ class Entry {
     async getOneEntry(req, res) {
         try {
             const entry = await db.any(
-                'SELECT * FROM entries WHERE id=${id}, user_id=${user_id}', req.params
+                'SELECT * FROM entries WHERE id=${id} AND user_id=${user_id}', req.params
             );
             res.status(200).json(entry);
         }
