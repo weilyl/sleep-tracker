@@ -24,7 +24,8 @@ Content-Type: application/json
 
 {
     "hours": 7, 
-    "day": "2021-03-22",
+    "day": "2021-03-27",
+    "wakeup": null,
     "title": "Good afternoon", 
     "description": "Today I woke up again"
 }
