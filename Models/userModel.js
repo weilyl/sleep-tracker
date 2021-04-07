@@ -4,6 +4,6 @@ class User {
         this.password = password
         this.firstname = firstname
         this.lastname = lastname
-        this.DOB = dob
+        this.dob = dob
     }
 }
